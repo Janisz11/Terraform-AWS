@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chmod +x *)",
+      "Bash(terraform init *)",
+      "Bash(python3 -m pip install python-hcl2 -q)",
+      "Bash(python3 -c \"import hcl2; print\\('ok'\\)\")",
+      "Bash(python3 *)"
+    ]
+  }
+}

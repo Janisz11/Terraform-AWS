@@ -20,10 +20,10 @@ locals {
 
   service_ports = {
     api_gateway          = 8000
-    order_service        = 8001
-    inventory_service    = 8002
-    payment_service      = 8003
-    notification_service = 8004
+    order_service        = 8000
+    inventory_service    = 8000
+    payment_service      = 8000
+    notification_service = 8000
   }
 
   db_urls = {
@@ -72,10 +72,10 @@ resource "aws_ecs_task_definition" "services" {
           { name = "RABBITMQ_URL",   value = var.rabbitmq_url }
         ],
         each.key == "api_gateway" ? [
-          { name = "ORDER_SERVICE_URL",        value = "http://order_service:8001" },
-          { name = "INVENTORY_SERVICE_URL",    value = "http://inventory_service:8002" },
-          { name = "PAYMENT_SERVICE_URL",      value = "http://payment_service:8003" },
-          { name = "NOTIFICATION_SERVICE_URL", value = "http://notification_service:8004" }
+          { name = "ORDER_SERVICE_URL",        value = "http://${var.order_service_ip}:8000" },
+          { name = "INVENTORY_SERVICE_URL",    value = "http://${var.inventory_service_ip}:8000" },
+          { name = "PAYMENT_SERVICE_URL",      value = "http://${var.payment_service_ip}:8000" },
+          { name = "NOTIFICATION_SERVICE_URL", value = "http://${var.notification_service_ip}:8000" }
         ] : []
       )
       logConfiguration = {

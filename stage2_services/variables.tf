@@ -4,20 +4,6 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
-variable "service_names" {
-  description = "List of microservice names"
-  type        = list(string)
-  default = [
-    "api_gateway",
-    "order_service",
-    "inventory_service",
-    "payment_service",
-    "notification_service",
-  ]
-}
-
-# ── From stage1 outputs ───────────────────────────────────────────────────────
-
 variable "vpc_id" {
   description = "VPC ID (from stage1 output: vpc_id)"
   type        = string
@@ -54,8 +40,6 @@ variable "s3_bucket_name" {
   type        = string
 }
 
-# ── Secrets ───────────────────────────────────────────────────────────────────
-
 variable "db_username" {
   description = "RDS master username"
   type        = string
@@ -74,28 +58,22 @@ variable "rabbitmq_url" {
   sensitive   = true
 }
 
-# ── Inter-service URLs (fill in after first deploy or use service discovery) ──
-
-variable "order_service_url" {
-  description = "Internal URL for order_service (e.g. http://<ip>:8001)"
+variable "order_service_ip" {
+  description = "Private IP of the running order_service ECS task"
   type        = string
-  default     = ""
 }
 
-variable "inventory_service_url" {
-  description = "Internal URL for inventory_service (e.g. http://<ip>:8002)"
+variable "inventory_service_ip" {
+  description = "Private IP of the running inventory_service ECS task"
   type        = string
-  default     = ""
 }
 
-variable "payment_service_url" {
-  description = "Internal URL for payment_service (e.g. http://<ip>:8003)"
+variable "payment_service_ip" {
+  description = "Private IP of the running payment_service ECS task"
   type        = string
-  default     = ""
 }
 
-variable "notification_service_url" {
-  description = "Internal URL for notification_service (e.g. http://<ip>:8004)"
+variable "notification_service_ip" {
+  description = "Private IP of the running notification_service ECS task"
   type        = string
-  default     = ""
 }
